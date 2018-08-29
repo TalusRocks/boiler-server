@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
 //parse incoming request bodies
 const bodyParser = require('body-parser')
 //logging request details
@@ -30,9 +29,5 @@ app.use((req, res, next) => {
   const message = `Could not ${req.method} ${req.path}`
   res.status(404).json({status, message})
 })
-
-//listen to port
-const listener = () => console.log(`Listening on port ${port}`)
-app.listen(port, listener)
 
 module.exports = app
