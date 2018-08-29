@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "node test | tap-spec"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,10 @@
     "express": "^4.16.3",
     "morgan": "^1.9.0",
     "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "supertest": "^3.1.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1"
   }
 }
