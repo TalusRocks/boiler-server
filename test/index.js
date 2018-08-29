@@ -4,18 +4,61 @@ const test = require('tape')
 const request = require('supertest')
 const app = require('../app')
 
-test('Correct tasks returned', function (t) {
+test('Get all tasks', function (t) {
   request(app)
     .get('/tasks/')
     .expect('Content-Type', /json/)
     .expect(200)
-    .end(function (err, res) {
-      let expectedUsers = ['a', 'b', 'c']
+    .end((err, res) => {
+      let expectedTasks = [
+        {
+          "id": 1,
+          "text": "a"
+        },
+        {
+          "id": 2,
+          "text": "b"
+        },
+        {
+          "id": 3,
+          "text": "c"
+        }
+      ]
 
       //test that there ISN'T an error
       t.error(err, 'No error')
       //compare to res.body
-      t.same(res.body.data, expectedUsers, 'Tasks as expected')
+      t.same(res.body.data, expectedTasks, 'Found all tasks')
+      t.end()
+    })
+})
+
+test('Get one task', function (t) {
+  request(app)
+    .get('/tasks/1')
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .end((err, res) => {
+      let expectedTask = [{ "id": 1, "text": "a"}]
+
+      t.error(err, 'No error')
+      t.same(res.body.data, expectedTask, 'Found specific task')
+      t.end()
+    })
+})
+
+test('Create new task', function (t) {
+  request(app)
+    .post('/tasks/')
+    .send({"text": "d"})
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      let expectedTask = { "id": 4 , "text": "d" }
+
+      let lastTask = res.body.data[res.body.data.length - 1]
+
+      t.error(err, 'No error')
+      t.same(lastTask, expectedTask, 'Created new task')
       t.end()
     })
 })

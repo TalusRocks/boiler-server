@@ -1,5 +1,18 @@
 //temp data
-const tasks = [ 'a', 'b', 'c']
+const tasks = [
+  {
+    "id": 1,
+    "text": "a"
+  },
+  {
+    "id": 2,
+    "text": "b"
+  },
+  {
+    "id": 3,
+    "text": "c"
+  }
+]
 
 class taskModel {
 
