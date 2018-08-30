@@ -76,3 +76,29 @@ test('Edit a task', function (t) {
       t.end()
     })
 })
+
+test('Delete a task', function (t) {
+  request(app)
+    .delete('/tasks/1')
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      let expectedTasks = [
+        {
+          "id": 2,
+          "text": "b"
+        },
+        {
+          "id": 3,
+          "text": "c"
+        },
+        {
+          "id": 4,
+          "text": "d"
+        }
+      ]
+
+      t.error(err, 'No error')
+      t.same(res.body.data, expectedTasks, 'Deleted a task')
+      t.end()
+    })
+})

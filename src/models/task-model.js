@@ -44,7 +44,6 @@ class taskModel {
     }
     return tasks
   }
-
 }
 
 module.exports = taskModel
