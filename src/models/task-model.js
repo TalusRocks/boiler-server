@@ -32,7 +32,7 @@ class taskModel {
 
   static editTask(id, taskEdit) {
     let taskToEdit = tasks.filter(el => el.id == id)
-    taskToEdit.name = taskEdit
+    taskToEdit[0].text = taskEdit.text
     return taskToEdit
   }
 

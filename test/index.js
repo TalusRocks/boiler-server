@@ -62,3 +62,17 @@ test('Create new task', function (t) {
       t.end()
     })
 })
+
+test('Edit a task', function (t) {
+  request(app)
+    .put('/tasks/1')
+    .send({"text": "i'm different!"})
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      let expectedTask = { "id": 1 , "text": "i'm different!" }
+
+      t.error(err, 'No error')
+      t.same(res.body.data[0], expectedTask, 'Edited task')
+      t.end()
+    })
+})
